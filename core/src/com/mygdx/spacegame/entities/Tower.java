@@ -47,7 +47,7 @@ public class Tower implements IUpdateRender{
     }
 
     private void shot() {
-        double now = System.currentTimeMillis()/1000;
+        double now = System.currentTimeMillis();
         if(now - lastShot >= currentAttackRate) {
 
             float angle = 0;
@@ -66,7 +66,7 @@ public class Tower implements IUpdateRender{
             projectile.setVelocity(velocity);
             WaveHandler.projectiles.add(projectile);
 
-            lastShot = System.currentTimeMillis()/1000;
+            lastShot = System.currentTimeMillis();
         }
     }
 

@@ -11,9 +11,6 @@ import java.util.Random;
 
 import static com.mygdx.spacegame.entities.Projectile.ProjectileType.*;
 
-/**
- * Created by Eldo on 2016.11.20..
- */
 
 public class Projectile implements IUpdateRender {
 
@@ -32,12 +29,12 @@ public class Projectile implements IUpdateRender {
     public static final Vector2 simpleProjVelocity = new Vector2(0,-700f);
     public static final Texture simpleProjTexture = new Texture(Gdx.files.internal("projectile.png"));
     public static final float simpleProjDamage = 1.0f;
-    public static final double simpleProjAttackRate = 0.2f;
+    public static final double simpleProjAttackRate = 200f;
 
     public static final Vector2 smallRocketVelocity = new Vector2(0, -500f);
     public static final Texture smallRocketTexture = new Texture(Gdx.files.internal("smallrocket.png"));
     public static final float smallRocketDamage = 2.0f;
-    public static final double smallRocketAttackRate = 0.8f;
+    public static final double smallRocketAttackRate = 800f;
 
 
 
