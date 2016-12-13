@@ -14,24 +14,19 @@ import java.util.Random;
 
 public class Enemy implements IUpdateRender{
 
-
-    //TODO: define different kind of ships, utilizing level for difficulty
-
     private Texture shipTexture;
-	private Texture healthBarTexture;
+    private Texture healthBarTexture;
     private Vector2 position = new Vector2();
     private Vector2 velocity = new Vector2();
     private Vector2 destination = new Vector2();
-	private Vector2 healtBarPosition = new Vector2();
+    private Vector2 healtBarPosition = new Vector2();
     private Vector2 projectileStart = new Vector2();
     private boolean attacking = false;
     private double lastShotTime = 0;
     private float damage = 50;
     private float health = 300;
-	private float currentHealth;
+    private float currentHealth;
     private int level = 0;
-
-
 
     public Enemy(Vector2 position, Vector2 destination, int level){
         this.position.set(position);
@@ -116,8 +111,8 @@ public class Enemy implements IUpdateRender{
         return  health;
     }
 	
-	public void dispose(){
+    public void dispose(){
 		shipTexture.dispose();
 		healthBarTexture.dispose();
-	}
+    }
 }
