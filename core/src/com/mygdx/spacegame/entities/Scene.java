@@ -11,13 +11,8 @@ import com.mygdx.spacegame.IUpdateRender;
 
 public class Scene implements IUpdateRender {
 
-    //TODO: implement a hud class and stuff it here by gathering informations of player stage and wavehandler
-
-    //collecting everything that involves in game play to handle them together
-    //this called in the screen class
-
-    Player player;           //player instance player - cannon - tower - shop
-    WaveHandler waveHandler; //handling the waves enemy - projectile
+    Player player;          
+    WaveHandler waveHandler; 
     Hud hud;
     Stage stage;
 
@@ -30,7 +25,6 @@ public class Scene implements IUpdateRender {
         waveHandler = new WaveHandler();
         hud = new Hud(stage);
     }
-
 
     public void update(float delta){
         player.update(delta);
@@ -47,9 +41,4 @@ public class Scene implements IUpdateRender {
         waveHandler.render(delta, batch);
         hud.render(delta, batch);
     }
-
-
-
-
-
 }
