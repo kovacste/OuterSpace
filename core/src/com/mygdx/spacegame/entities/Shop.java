@@ -37,12 +37,12 @@ public class Shop implements IUpdateRender{
     public Shop(Stage stage){
         this.stage = stage;
    
-		towerOneButton = new ImageButton();
+		/*towerOneButton = new ImageButton();
 		towerTwoButton = new ImageButton();
 		towerThreeButton = new ImageButton();
 		towerFourButton = new ImageButton();
 		buyButton = new ImageButton();
-		cancelButton = new ImageButton();
+		cancelButton = new ImageButton();*/
 		
         towerOneButton.addListener(new ActorGestureListener(){
             @Override

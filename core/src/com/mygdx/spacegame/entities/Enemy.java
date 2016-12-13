@@ -19,7 +19,7 @@ public class Enemy implements IUpdateRender{
     private Vector2 position = new Vector2();
     private Vector2 velocity = new Vector2();
     private Vector2 destination = new Vector2();
-    private Vector2 healtBarPosition = new Vector2();
+    private Vector2 healthBarPosition = new Vector2();
     private Vector2 projectileStart = new Vector2();
     private boolean attacking = false;
     private double lastShotTime = 0;
@@ -35,7 +35,7 @@ public class Enemy implements IUpdateRender{
         health *= level;
         this.level = level;
         calculateVelocity();
-		healthBarTexture = new Texture(Gdx.files.internal("healtbartexture.png"));
+		healthBarTexture = new Texture(Gdx.files.internal("healthbartexture.png"));
 		currentHealth = health;
     }
 
@@ -50,7 +50,7 @@ public class Enemy implements IUpdateRender{
             attack();
         }
         projectileStart.set(position.x + shipTexture.getWidth() / 2, position.y);
-		healtBarPosition.set(position.x + shipTexture.getHeight() + 5, position.y);
+		healthBarPosition.set(position.x, position.y + 10 + shipTexture.getHeight());
     }
 
     private void attack() {
@@ -62,7 +62,7 @@ public class Enemy implements IUpdateRender{
     }
 
     public void render(float delta, Batch batch){
-		batch.draw(healtbartexture, healtBarPosition.x, healtBarPosition.y, healtbartexture.getWidth() * (health / currentHealth), healtbartexture.getHeight());
+		batch.draw(healthBarTexture, healthBarPosition.x, healthBarPosition.y, healthBarTexture.getWidth() * (health / currentHealth), healthBarTexture.getHeight());
         batch.draw(shipTexture,position.x,position.y);
     }
 
