@@ -9,26 +9,17 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.spacegame.IUpdateRender;
 
-/**
- * Created by Eldo on 2016.11.20..
- */
-
-//TODO: fix projectile velocity
-    //TODO: prepare class for multiple cannons and changing current cannon
-    //TODO: define new cannons properties
 
 public class Cannon implements IUpdateRender{
 
     private static Vector2 cannonPosition = new Vector2(360,70);
-    private static Vector2 cannonEndPosition;
-    float angle = 0;
+    private static Vector2 cannonEndPosition = new Vector2();
+    private float angle = 0;
     private float towerAngle = 0;
-
 
     Stage stage;
     public static Texture cannonTexture;
     public static float cannonDamage;
-
 
 
     public  Cannon(Stage stage){
@@ -38,7 +29,6 @@ public class Cannon implements IUpdateRender{
         cannonEndPosition = new Vector2(cannonPosition.x + cannonTexture.getWidth() / 2, cannonPosition.y + cannonTexture.getHeight());
         this.stage = stage;
     }
-
 
     @Override
     public void update(float delta) {
@@ -68,6 +58,4 @@ public class Cannon implements IUpdateRender{
         projectile.setVelocity(velocity);
         WaveHandler.projectiles.add(projectile);
     }
-
-
 }
