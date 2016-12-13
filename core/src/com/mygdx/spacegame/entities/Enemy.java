@@ -17,16 +17,18 @@ public class Enemy implements IUpdateRender{
 
     //TODO: define different kind of ships, utilizing level for difficulty
 
-
     private Texture shipTexture;
+	private Texture healthBarTexture;
     private Vector2 position = new Vector2();
     private Vector2 velocity = new Vector2();
     private Vector2 destination = new Vector2();
+	private Vector2 healtBarPosition = new Vector2();
     private Vector2 projectileStart = new Vector2();
     private boolean attacking = false;
     private double lastShotTime = 0;
     private float damage = 50;
     private float health = 300;
+	private float currentHealth;
     private int level = 0;
 
 
@@ -38,6 +40,8 @@ public class Enemy implements IUpdateRender{
         health *= level;
         this.level = level;
         calculateVelocity();
+		healthBarTexture = new Texture(Gdx.files.internal("healtbartexture.png"));
+		currentHealth = health;
     }
 
     public void update(float delta){
@@ -51,18 +55,19 @@ public class Enemy implements IUpdateRender{
             attack();
         }
         projectileStart.set(position.x + shipTexture.getWidth() / 2, position.y);
+		healtBarPosition.set(position.x + shipTexture.getHeight() + 5, position.y);
     }
 
     private void attack() {
         double now = System.currentTimeMillis() / 1000;
         if(now - lastShotTime > 1){
-            //new projectile
             lastShotTime = System.currentTimeMillis() / 1000;
             WaveHandler.projectiles.add(new Projectile(projectileStart, damage, Projectile.ProjectileType.SIMPLE_RED, Projectile.ENEMY_TYPE,0));
         }
     }
 
     public void render(float delta, Batch batch){
+		batch.draw(healtbartexture, healtBarPosition.x, healtBarPosition.y, healtbartexture.getWidth() * (health / currentHealth), healtbartexture.getHeight());
         batch.draw(shipTexture,position.x,position.y);
     }
 
@@ -71,7 +76,6 @@ public class Enemy implements IUpdateRender{
         velocity.nor();
         velocity.scl(100);
     }
-
 
     public Texture getShipTexture() {
         return shipTexture;
@@ -111,10 +115,9 @@ public class Enemy implements IUpdateRender{
     public float getHealth(){
         return  health;
     }
-
-
-
-
-
-
+	
+	public void dispose(){
+		shipTexture.dispose();
+		healthBarTexture.dispose();
+	}
 }
