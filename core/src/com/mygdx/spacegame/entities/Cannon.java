@@ -54,7 +54,7 @@ public class Cannon implements IUpdateRender{
         towerAngle = angle;
         velocity.nor();
         velocity.scl(1000);
-        Projectile projectile = new Projectile(cannonEndPosition, cannonDamage, Projectile.ProjectileType.SIMPLE_RED,Projectile.PLAYER_TYPE,angle);
+        Projectile projectile = new Projectile(cannonEndPosition, cannonDamage, Projectile.ProjectileType.YELLOW_BEAM,Projectile.PLAYER_TYPE,angle);
         projectile.setVelocity(velocity);
         WaveHandler.projectiles.add(projectile);
     }

@@ -20,7 +20,7 @@ public class Projectile implements IUpdateRender {
     public static enum ProjectileType{
         SIMPLE_RED, SIMPLE_BLUE, SIMPLE_YELLOW, SIMPLE_GREEN, //simply projectiles
         ROCKET_SMALL, ROCKET_MEDIUM, ROCKET_LARGE,            //rockets
-        BALL_RED, BALL_BLUE, BALL_YELLOW, BALL_GREEN          //ball like projectiles
+        BALL_RED, BALL_BLUE, BALL_YELLOW, BALL_GREEN, RAIL_RED , YELLOW_BEAM         //ball like projectiles
     }
 
     private static ProjectileType[] types = new ProjectileType[]{SIMPLE_BLUE, SIMPLE_GREEN,SIMPLE_RED,SIMPLE_YELLOW,ROCKET_SMALL,ROCKET_MEDIUM,ROCKET_LARGE,BALL_RED,BALL_BLUE,BALL_YELLOW,BALL_GREEN};
@@ -35,6 +35,16 @@ public class Projectile implements IUpdateRender {
     public static final Texture smallRocketTexture = new Texture(Gdx.files.internal("smallrocket.png"));
     public static final float smallRocketDamage = 2.0f;
     public static final double smallRocketAttackRate = 800f;
+
+    public static final Vector2 railRedVelocity = new Vector2(0,0);
+    public static final Texture railRedTexture = new Texture(Gdx.files.internal("rail.png"));
+    public static final float railRedDamage = 10;
+    public static final double railRedAttackRate = 2000f;
+
+    public static final Vector2 yellowBeamVelocity = new Vector2(0, -700);
+    public static final Texture yellowBeamTexture = new Texture(Gdx.files.internal("beam.png"));
+    public static final float yellowBeamDamage = 1.5f;
+    public static final double yellowBeamAttackRate = 300f;
 
 
 
@@ -84,6 +94,17 @@ public class Projectile implements IUpdateRender {
                 this.velocity.set(smallRocketVelocity);
                 this.damage *= smallRocketDamage;
                 this.attackRate = smallRocketAttackRate;
+                break;
+            case RAIL_RED:
+                this.projectileTexture = railRedTexture;
+                this.velocity.set(railRedVelocity);
+                this.damage *= railRedDamage;
+                this.attackRate = railRedAttackRate;
+            case YELLOW_BEAM:
+                this.projectileTexture = yellowBeamTexture;
+                this.velocity.set(yellowBeamVelocity);
+                this.damage *= yellowBeamDamage;
+                this.attackRate = yellowBeamAttackRate;
             default:
                 break;
         }
