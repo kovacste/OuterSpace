@@ -31,12 +31,12 @@ public class Enemy implements IUpdateRender{
     public Enemy(Vector2 position, Vector2 destination, int level){
         this.position.set(position);
         this.destination.set(destination);
-        this.shipTexture = new Texture(Gdx.files.internal("level1.png"));
         health *= level;
         this.level = level;
         calculateVelocity();
 		healthBarTexture = new Texture(Gdx.files.internal("healthbartexture.png"));
 		currentHealth = health;
+        this.shipTexture = setCurrentLevelTexture();
     }
 
     public void update(float delta){
@@ -114,5 +114,27 @@ public class Enemy implements IUpdateRender{
     public void dispose(){
 		shipTexture.dispose();
 		healthBarTexture.dispose();
+    }
+
+    private Texture setCurrentLevelTexture(){
+        String path;
+        switch (level){
+            case 1:
+                path = "level1.png";
+                break;
+            case 2:
+                path = "level2.png";
+                break;
+            case 3:
+                path = "level3.png";
+                break;
+            case 4:
+                path = "level3.png";
+                break;
+            default:
+                path = "level1.png";
+                break;
+        }
+        return new Texture(Gdx.files.internal(path));
     }
 }

@@ -105,6 +105,7 @@ public class WaveHandler implements IUpdateRender{
             position.set(array[i++], array[i++]);
             destination.set(array[i++], array[i++]);
             enemies.add(new Enemy(position,destination,type));
+            Gdx.app.log("LEVEL:", String.valueOf(type));
         }
     }
 
