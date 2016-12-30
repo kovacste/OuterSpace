@@ -117,24 +117,6 @@ public class Enemy implements IUpdateRender{
     }
 
     private Texture setCurrentLevelTexture(){
-        String path;
-        switch (level){
-            case 1:
-                path = "level1.png";
-                break;
-            case 2:
-                path = "level2.png";
-                break;
-            case 3:
-                path = "level3.png";
-                break;
-            case 4:
-                path = "level3.png";
-                break;
-            default:
-                path = "level1.png";
-                break;
-        }
-        return new Texture(Gdx.files.internal(path));
+        return new Texture(Gdx.files.internal("level" + String.valueOf(level) + ".png"));
     }
 }
