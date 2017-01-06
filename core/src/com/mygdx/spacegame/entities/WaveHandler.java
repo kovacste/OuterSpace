@@ -19,17 +19,16 @@ import java.util.ArrayList;
 
 public class WaveHandler implements IUpdateRender{
 
-    Rectangle rect = new Rectangle();
-    Rectangle otherRect = new Rectangle();
+    private Rectangle rect = new Rectangle();
+    private Rectangle otherRect = new Rectangle();
+    private ParticleEffect laserImpactEffect;
+    private ParticleEffect rocketImpactEffect;
 
-    ParticleEffect laserImpactEffect;
-    ParticleEffect rocketImpactEffect;
-
-    Array<ParticleEffect> effects = new Array<ParticleEffect>();
+    private Array<ParticleEffect> effects = new Array<ParticleEffect>();
     int currentWave = 1;
 
 
-    int[] wave1 = new int[]{
+    private int[] wave1 = new int[]{
             //type Vector2 position  Vector2 destination
               1, 0,   2100, 630, 900,
               1, 0,   1900, 540, 220,
@@ -41,7 +40,7 @@ public class WaveHandler implements IUpdateRender{
               1, 630, 1500, 400, 600
     };
 
-    int[] wave2 = new int[]{
+    private int[] wave2 = new int[]{
             //type Vector2 position  Vector2 destination
             2, 0,   2100, 630, 900,
             2, 0,   1900, 540, 220,
@@ -55,7 +54,7 @@ public class WaveHandler implements IUpdateRender{
             2, 630, 1500, 400, 600
     };
 
-    int[] wave3 = new int[]{
+    private int[] wave3 = new int[]{
             //type Vector2 position  Vector2 destination
             3, 0,   2100, 630, 900,
             3, 0,   1900, 540, 220,
@@ -76,10 +75,9 @@ public class WaveHandler implements IUpdateRender{
             3, 630, (int) (1500 * 1.2), 400, 600
     };
 
-    Array<int[]> waves = new Array<int[]>();
+    private Array<int[]> waves = new Array<int[]>();
 
     public Array<Enemy> enemies = new Array<Enemy>();
-
     public static Array<Projectile> projectiles = new Array<Projectile>();
 
     public WaveHandler(){
@@ -93,6 +91,8 @@ public class WaveHandler implements IUpdateRender{
         parseCurrentLevel(currentWave);
         laserImpactEffect = new ParticleEffect();
         laserImpactEffect.load(Gdx.files.internal("effects/laserimpacteffect.txt"), Gdx.files.internal("effects"));
+        rocketImpactEffect = new ParticleEffect();
+        rocketImpactEffect.load(Gdx.files.internal("effects/rocketimpacteffect.txt"), Gdx.files.internal("effects"));
     }
 
     private void parseCurrentLevel(int currentWave) {
@@ -105,7 +105,6 @@ public class WaveHandler implements IUpdateRender{
             position.set(array[i++], array[i++]);
             destination.set(array[i++], array[i++]);
             enemies.add(new Enemy(position,destination,type));
-            Gdx.app.log("LEVEL:", String.valueOf(type));
         }
     }
 
@@ -176,6 +175,9 @@ public class WaveHandler implements IUpdateRender{
         switch (type){
             case SIMPLE_RED:
                 effect = new ParticleEffect(laserImpactEffect);
+                break;
+            case ROCKET_SMALL:
+                effect = new ParticleEffect(rocketImpactEffect);
                 break;
             default:
                 effect = new ParticleEffect(laserImpactEffect);

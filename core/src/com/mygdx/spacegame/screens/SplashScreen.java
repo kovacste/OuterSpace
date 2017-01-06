@@ -16,18 +16,15 @@ import com.mygdx.spacegame.AnimationFactory;
 
 public class SplashScreen extends ScreenAdapter {
 
-    Game game;
-
-    SpriteBatch batch;
-    Texture splashTexture;
-    Animation splashAnim;
-    boolean playSplash = true;
-
-    Texture logoTexture;
-    Animation logoAnimation;
-    boolean playLogo = false;
-
-    float stateTime;
+    private Game game;
+    private SpriteBatch batch;
+    private Texture splashTexture;
+    private Animation splashAnim;
+    private boolean playSplash = true;
+    private Texture logoTexture;
+    private Animation logoAnimation;
+    private boolean playLogo = false;
+    private float stateTime;
 
     public SplashScreen(Game game){
         this.game = game;

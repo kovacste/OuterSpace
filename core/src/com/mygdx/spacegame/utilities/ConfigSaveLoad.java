@@ -6,9 +6,9 @@ package com.mygdx.spacegame.utilities;
 
 public class ConfigSaveLoad {
 
-    static int highScore = 10;
-    static int currentWave = 1;
-    static boolean loaded = false;
+    private static int highScore = 10;
+    private static int currentWave = 1;
+    private static boolean loaded = false;
 
     public static int getHighScore(){
         if(loaded){
@@ -28,7 +28,7 @@ public class ConfigSaveLoad {
         }
     }
 
-    public static void setHightScore(int highScore){
+    public static void setHighScore(int highScore){
         ConfigSaveLoad.highScore = highScore;
     }
     public static void setCurrentWave(int currentWave){

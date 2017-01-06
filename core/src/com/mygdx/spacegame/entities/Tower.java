@@ -29,7 +29,7 @@ public class Tower implements IUpdateRender{
     float towerAngle = 0;
     double lastShot = 0;
     double currentAttackRate = Projectile.smallRocketAttackRate;
-    public com.mygdx.spacegame.entities.Projectile.ProjectileType currentType =Projectile.ProjectileType.ROCKET_SMALL;
+    public com.mygdx.spacegame.entities.Projectile.ProjectileType currentType = Projectile.ProjectileType.ROCKET_SMALL;
 
 
     public Tower(Vector2 position, float damage, Texture texture, Stage stage){
