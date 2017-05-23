@@ -5,7 +5,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.spacegame.entities.Scene;
 
@@ -20,19 +30,21 @@ public class GameScreen extends ScreenAdapter{
     //TODO: implement random background
     //TODO: reserve place for ads on top
 
-    Stage stage;
-    Scene scene;
+    private Stage stage;
+    private Scene scene;
 
     public static boolean running = true;
+    public static final float FIGHT_SPEED = -350f;
+    public static final float TRAVEL_SPEED = -4000f;
 
 
 
+    private Game game;
+    private Texture background = new Texture(Gdx.files.internal("gamebg8pixel.png"));
+    private Texture background2 = background;
+    private float posY = 0;
+    public static float speed = TRAVEL_SPEED;
 
-    Game game;
-    Texture background = new Texture(Gdx.files.internal("gamebg8pixel.png"));
-    Texture background2 = background;
-
-    float posY = 0;
 
 
     public GameScreen(Game game){
@@ -42,6 +54,9 @@ public class GameScreen extends ScreenAdapter{
         Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(true);
         scene = new Scene(stage);
+
+
+
     }
 
     @Override
@@ -60,12 +75,11 @@ public class GameScreen extends ScreenAdapter{
         }
         scene.render(delta, stage.getBatch());
 
-
-
+        stage.act(delta);
         stage.getBatch().end();
-        posY += 0.5f;
-        if(posY >= Gdx.graphics.getHeight()){
-            posY = 0;
+        posY += speed * delta;
+        if(posY <= 0){
+            posY = Gdx.graphics.getHeight();
         }
 
     }

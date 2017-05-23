@@ -39,6 +39,8 @@ public class MenuScreen extends ScreenAdapter {
     String[] welcomeMsgs = new String[]{"Hey!", "Good Day!", "Hiya!", "Welcome!", "Time to shoot!", "Have a nice day!", "Ahoy!", "Hi!", "Greetings!"};
 
     ImageButton playButton;
+    ImageButton shopButton;
+    ImageButton optionsButton;
     ImageButton quitButton;
 
     Label highScore;
@@ -89,14 +91,24 @@ public class MenuScreen extends ScreenAdapter {
 
         playButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("playbutton.png")))),
                                      new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("playbuttontouched.png")))));
-        playButton.setPosition(110,150, Align.center);
+        playButton.setPosition(110,200, Align.center);
 
         quitButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("playbutton.png")))),
                 new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("playbuttontouched.png")))));
-        quitButton.setPosition(110,100, Align.center);
+        quitButton.setPosition(110,50, Align.center);
+
+        shopButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("playbutton.png")))),
+                new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("playbuttontouched.png")))));
+        shopButton.setPosition(110,150, Align.center);
+
+        optionsButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("playbutton.png")))),
+                new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("playbuttontouched.png")))));
+        optionsButton.setPosition(110,100, Align.center);
 
         stage.addActor(playButton);
         stage.addActor(quitButton);
+        stage.addActor(shopButton);
+        stage.addActor(optionsButton);
 
         playButton.addListener(new ActorGestureListener(){
             @Override
@@ -111,6 +123,22 @@ public class MenuScreen extends ScreenAdapter {
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 super.tap(event, x, y, count, button);
                 quitGame();
+            }
+        });
+
+        optionsButton.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                game.setScreen(new OptionsScreen(game));
+            }
+        });
+
+        shopButton.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                game.setScreen(new ShopScreen(game));
             }
         });
 

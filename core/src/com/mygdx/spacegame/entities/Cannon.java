@@ -17,13 +17,13 @@ public class Cannon implements IUpdateRender{
     private float angle = 0;
     private float towerAngle = 0;
 
-    Stage stage;
+    private Stage stage;
     public static Texture cannonTexture;
     public static float cannonDamage;
 
 
-    public  Cannon(Stage stage){
-        cannonTexture = new Texture(Gdx.files.internal("lvl1cannon.png"));
+    public Cannon(Stage stage){
+        cannonTexture = new Texture(Gdx.files.internal("lvl1tower.png"));
         cannonDamage = 50;
         cannonPosition.x -= cannonTexture.getWidth() / 2;
         cannonEndPosition = new Vector2(cannonPosition.x + cannonTexture.getWidth() / 2, cannonPosition.y + cannonTexture.getHeight());
@@ -40,7 +40,7 @@ public class Cannon implements IUpdateRender{
     @Override
     public void render(float delta, Batch batch) {
         batch.draw(new TextureRegion(cannonTexture), cannonPosition.x, cannonPosition.y,cannonTexture.getWidth() / 2, cannonTexture.getHeight() / 3,
-                cannonTexture.getWidth(),cannonTexture.getHeight(),1,1,towerAngle);
+                cannonTexture.getWidth(),cannonTexture.getHeight(),2,2,towerAngle);
     }
 
     private void shot(){
@@ -54,8 +54,11 @@ public class Cannon implements IUpdateRender{
         towerAngle = angle;
         velocity.nor();
         velocity.scl(1000);
-        Projectile projectile = new Projectile(cannonEndPosition, cannonDamage, Projectile.ProjectileType.YELLOW_BEAM,Projectile.PLAYER_TYPE,angle);
+        Projectile projectile = new Projectile(cannonEndPosition, Projectile.ProjectileType.YELLOW_BEAM,Projectile.PLAYER_TYPE);
+        projectile.setAngle(angle);
         projectile.setVelocity(velocity);
         WaveHandler.projectiles.add(projectile);
     }
+
+
 }

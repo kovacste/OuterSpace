@@ -57,7 +57,7 @@ public class Enemy implements IUpdateRender{
         double now = System.currentTimeMillis() / 1000;
         if(now - lastShotTime > 1){
             lastShotTime = System.currentTimeMillis() / 1000;
-            WaveHandler.projectiles.add(new Projectile(projectileStart, damage, Projectile.ProjectileType.SIMPLE_RED, Projectile.ENEMY_TYPE,0));
+            WaveHandler.projectiles.add(new Projectile(projectileStart, Projectile.ProjectileType.SIMPLE_RED, Projectile.ENEMY_TYPE));
         }
     }
 

@@ -22,6 +22,7 @@ public class Hud implements IUpdateRender{
     Label scoreLabel;
     Label waveLabel;
     Label currencyLabel;
+    Label fpsLabel;
     BitmapFont font;
     
     private int score = 0;
@@ -37,12 +38,15 @@ public class Hud implements IUpdateRender{
         scoreLabel = new Label("Score: " + String.format("%03d",score), new Label.LabelStyle(font, new Color(1,1,1,1)));
         waveLabel = new Label("Wave: " + String.format("%02d", wave), new Label.LabelStyle(font, new Color(1,1,1,1)));
         currencyLabel = new Label("Currency: " + String.format("%04d", Player.currency), new Label.LabelStyle(font, new Color(1,1,1,1)));
+        fpsLabel = new Label("FPS: " + Gdx.graphics.getFramesPerSecond(), new Label.LabelStyle(font, new Color(1,1,1,1)));
         Table table = new Table();
         table.top();
         table.setFillParent(true);
         table.add(scoreLabel).expandX().padTop(140);
         table.add(waveLabel).expandX().padTop(140);
         table.add(currencyLabel).expandX().padTop(140);
+        table.add(fpsLabel).expandX().padTop(140);
+
         stage.addActor(table);
     }
 

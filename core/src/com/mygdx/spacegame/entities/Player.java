@@ -3,9 +3,14 @@ package com.mygdx.spacegame.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.spacegame.IUpdateRender;
 
 /**
@@ -28,6 +33,10 @@ public class Player implements IUpdateRender {
     public static Tower towerTwo;
     public static Tower towerThree;
     public static Tower towerFour;
+    public ImageButton towerOneButton;
+    public ImageButton towerTwoButton;
+    public ImageButton towerThreeButton;
+    public ImageButton towerFourButton;
 
     boolean towerOneSet = true;
     boolean towerTwoSet = true;
@@ -48,8 +57,54 @@ public class Player implements IUpdateRender {
         towerTwo = new Tower(new Vector2(120,30),50, Tower.lvl1Tower, stage);
         towerThree = new Tower(new Vector2(550,30),50, Tower.lvl1Tower, stage);
         towerFour = new Tower(new Vector2(650,30),50, Tower.lvl1Tower, stage);
-        towerThree.currentType = Projectile.ProjectileType.SIMPLE_RED;
-        towerThree.currentAttackRate = Projectile.simpleProjAttackRate;
+        towerThree.currentType = Projectile.ProjectileType.DOUBLE_GUN;
+        towerOneButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("up.png")))));
+        towerTwoButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("up.png")))));
+        towerThreeButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("up.png")))));
+        towerFourButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("up.png")))));
+
+        towerFourButton.setPosition(towerFour.getPosition().x, towerFour.getPosition().y);
+        towerOneButton.setPosition(towerOne.getPosition().x, towerOne.getPosition().y);
+        towerTwoButton.setPosition(towerTwo.getPosition().x, towerTwo.getPosition().y);
+        towerThreeButton.setPosition(towerThree.getPosition().x, towerThree.getPosition().y);
+
+        towerFourButton.setVisible(false);
+        towerOneButton.setVisible(false);
+        towerTwoButton.setVisible(false);
+        towerThreeButton.setVisible(false);
+
+        towerOneButton.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+            }
+        });
+
+        towerTwoButton.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+            }
+        });
+
+        towerThreeButton.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+            }
+        });
+
+        towerFourButton.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+            }
+        });
+        k
+        stage.addActor(towerFourButton);
+        stage.addActor(towerOneButton);
+        stage.addActor(towerThreeButton);
+        stage.addActor(towerTwoButton);
     }
 
     public void update(float delta){
@@ -97,4 +152,14 @@ public class Player implements IUpdateRender {
     }
 
 
+    public void highlightTowers() {
+        towerOne.highlight();
+        towerTwo.highlight();
+        towerFour.highlight();
+        towerThree.highlight();
+        towerFourButton.setVisible(!towerFourButton.isVisible());
+        towerOneButton.setVisible(!towerOneButton.isVisible());
+        towerTwoButton.setVisible(!towerTwoButton.isVisible());
+        towerThreeButton.setVisible(!towerThreeButton.isVisible());
+    }
 }

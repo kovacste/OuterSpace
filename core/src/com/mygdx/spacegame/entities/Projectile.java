@@ -17,54 +17,64 @@ public class Projectile implements IUpdateRender {
     public static final int ENEMY_TYPE = 0;
     public static final int PLAYER_TYPE = 1;
 
-    public static enum ProjectileType{
-        SIMPLE_RED, SIMPLE_BLUE, SIMPLE_YELLOW, SIMPLE_GREEN, //simply projectiles
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public float getDamage() {
+        return damage;
+    }
+
+    public enum ProjectileType{
+        SIMPLE_RED, SIMPLE_BLUE, SIMPLE_YELLOW, SIMPLE_GREEN, DOUBLE_GUN, //simply projectiles
         ROCKET_SMALL, ROCKET_MEDIUM, ROCKET_LARGE,            //rockets
         BALL_RED, BALL_BLUE, BALL_YELLOW, BALL_GREEN, RAIL_RED , YELLOW_BEAM         //ball like projectiles
     }
 
-    private static ProjectileType[] types = new ProjectileType[]{SIMPLE_BLUE, SIMPLE_GREEN,SIMPLE_RED,SIMPLE_YELLOW,ROCKET_SMALL,ROCKET_MEDIUM,ROCKET_LARGE,BALL_RED,BALL_BLUE,BALL_YELLOW,BALL_GREEN};
+    private static ProjectileType[] types = new ProjectileType[]{SIMPLE_BLUE, DOUBLE_GUN, SIMPLE_GREEN,SIMPLE_RED,SIMPLE_YELLOW,ROCKET_SMALL,ROCKET_MEDIUM,ROCKET_LARGE,BALL_RED,BALL_BLUE,BALL_YELLOW,BALL_GREEN};
 
     //Simple projectile red
     public static final Vector2 simpleProjVelocity = new Vector2(0,-700f);
     public static final Texture simpleProjTexture = new Texture(Gdx.files.internal("projectile.png"));
-    public static final float simpleProjDamage = 1.0f;
+    public static final float simpleProjDamage = 100.0f;
     public static final double simpleProjAttackRate = 200f;
 
     public static final Vector2 smallRocketVelocity = new Vector2(0, -500f);
     public static final Texture smallRocketTexture = new Texture(Gdx.files.internal("smallrocket.png"));
-    public static final float smallRocketDamage = 2.0f;
+    public static final float smallRocketDamage = 200.0f;
     public static final double smallRocketAttackRate = 800f;
 
     public static final Vector2 railRedVelocity = new Vector2(0,0);
     public static final Texture railRedTexture = new Texture(Gdx.files.internal("rail.png"));
-    public static final float railRedDamage = 10;
+    public static final float railRedDamage = 1000;
     public static final double railRedAttackRate = 2000f;
 
     public static final Vector2 yellowBeamVelocity = new Vector2(0, -700);
     public static final Texture yellowBeamTexture = new Texture(Gdx.files.internal("beam.png"));
-    public static final float yellowBeamDamage = 1.5f;
+    public static final float yellowBeamDamage = 100.5f;
     public static final double yellowBeamAttackRate = 300f;
 
+    public static final Vector2 doubleGunProjVelocity = new Vector2(0, -700);
+    public static final Texture doubleGunProjTexture = new Texture(Gdx.files.internal("doublegunproj.png"));
+    public static final float doubleGunProjDamage = 100.5f;
+    public static final double doubleGunAttackRate = 500f;
 
 
-    Vector2 position = new Vector2();
-    Vector2 velocity = new Vector2();
-    float damage;
-    Texture projectileTexture;
-    ProjectileType type;
-    int projType;
-    float angle = 0;
-    public double attackRate = 0;
+    private Vector2 position = new Vector2();
+    private Vector2 velocity = new Vector2();
+    private float damage = 1;
+    private Texture projectileTexture;
+    private ProjectileType type;
+    private int projType;
+    private float angle = 0;
+    private double attackRate = 0;
 
 
-    public Projectile(Vector2 position, float damage, ProjectileType type, int projType, float angle){
+    public Projectile(Vector2 position, ProjectileType type, int projType){
         this.position.set(position);
         this.velocity.set(velocity);
-        this.damage = damage;
         this.type = type;
         this.projType = projType;
-        this.angle = angle;
         createProjectile();
     }
 
@@ -100,11 +110,19 @@ public class Projectile implements IUpdateRender {
                 this.velocity.set(railRedVelocity);
                 this.damage *= railRedDamage;
                 this.attackRate = railRedAttackRate;
+                break;
             case YELLOW_BEAM:
                 this.projectileTexture = yellowBeamTexture;
                 this.velocity.set(yellowBeamVelocity);
                 this.damage *= yellowBeamDamage;
                 this.attackRate = yellowBeamAttackRate;
+                break;
+            case DOUBLE_GUN:
+                this.projectileTexture = doubleGunProjTexture;
+                this.velocity.set(doubleGunProjVelocity);
+                this.damage *= doubleGunProjDamage;
+                this.attackRate = doubleGunAttackRate;
+                break;
             default:
                 break;
         }
@@ -124,5 +142,22 @@ public class Projectile implements IUpdateRender {
 
     public Texture getTexture(){
         return projectileTexture;
+    }
+
+    public void setAngle(float angle){
+        this.angle = angle;
+    }
+
+    public double getAttackRate(ProjectileType type){
+        switch (type){
+            case SIMPLE_RED:
+                return simpleProjAttackRate;
+            default:
+                return simpleProjAttackRate;
+        }
+    }
+
+    public ProjectileType getType(){
+        return type;
     }
 }
